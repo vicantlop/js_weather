@@ -1,11 +1,16 @@
-import axios from 'axios';
 import { useState } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchWeather } from '../reducers/weatherSlice';
 
 
 const Forecast = () => {
     const [city, setCity] = useState("")
     const [days, setDays] = useState("")
-    const [forecast, setForecast] = useState()
+    // const [forecast, setForecast] = useState()
+
+    const weather = useSelector((state) => state.weather.weather)
+    const dispatch = useDispatch()
 
     const setWeather = (event) => {
         event.preventDefault();
@@ -19,49 +24,23 @@ const Forecast = () => {
             default:
                 break;
         }
-        console.log(city, days)
-        console.log(typeof days)
     }
 
-    const options = {
-        method: 'GET',
-        url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
-        params: {
-            q: `${city}`,
-            days: `${days}`
-        },
-        headers: {
-            'X-RapidAPI-Key': `${process.env.REACT_APP_APIKEY}`,
-            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-        }
-    };
-
-    const getWeather = async (event) => {
-        console.log(city, days)
+    const getWeather = (event) => {
         event.preventDefault()
-        console.log(options)
-
-        try {
-            const response = await axios.request(options);
-            console.log(response.data);
-            setForecast(response.data)
-        } catch (error) {
-            console.error(error);
-        }
+        dispatch(fetchWeather(city, days))
     }
 
     let location
     let current
-    let threeday
-    
-    console.log(process.env.REACT_APP_APIKEY)
+    console.log(weather.location)
+    // let threeday
   
-    if (forecast) {
-      location = forecast["location"]
-      current = forecast["current"]
-      threeday = forecast["forecast"]['forecastday']
-  
-      console.log(`It is currently ${current["temp_f"]} degrees fahrenheit and ${current["condition"]["text"]} in ${location["name"]}, ${location["country"]}`)
+    if (weather.location) {
+      location = weather["location"]
+      current = weather["current"]
+    //   threeday = forecast["forecast"]['forecastday']
+
     }
 
     return (
@@ -73,7 +52,7 @@ const Forecast = () => {
                 <input type="text" id="days" name="days" onChange={setWeather}></input><br />
                 <input type="submit" value="Submit" onClick={getWeather} />
             </form>
-            {forecast ? (<div>It is currently {current["temp_f"]} degrees fahrenheit and {current["condition"]["text"]} in {location["name"]}, {location["country"]}</div>) : null}
+            {weather.location ? (<div>It is currently {current["temp_f"]} degrees fahrenheit and {current["condition"]["text"]} in {location["name"]}, {location["country"]}</div>) : null}
         </div>
     )
 }
