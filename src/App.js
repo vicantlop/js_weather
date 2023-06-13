@@ -1,69 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
-
-import { useState } from 'react';
-
-
+import 'materialize-css/dist/css/materialize.min.css';
+import './materialize';
+import Navbar from "./components/Navbar"
+import Forecast from './components/Forecast';
 
 function App() {
-  const [city, setCity] = useState("")
-  const [days, setDays] = useState("")
-
-  const setWeather = (event) => {
-    event.preventDefault();
-    switch (event.target.name) {
-      case 'city':
-        setCity(event.target.value);
-        break;
-      case 'days':
-        setDays(event.target.value);
-        break;
-      default:
-        break;
-    }
-    console.log(city, days)
-    console.log(typeof days)
-  }
-
-  const options = {
-    method: 'GET',
-    url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
-    params: {
-      q: `${city}`,
-      days: `${days}`
-    },
-    headers: {
-      'X-RapidAPI-Key': '187b0ec4b7msh9909e74c3e40f95p17b4b6jsn67ee1ffae374',
-      'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-    }
-  };
-
-  const getWeather = async (event) => {
-    console.log(city,days)
-    event.preventDefault()
-    console.log(options)
-    
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const location = forecast["location"]
+  // const current = forecast["current"]
+  // const threeday = forecast["forecast"]['forecastday']
 
 
+  // console.log(`It is currently ${current["temp_f"]} degrees fahrenheit and ${current["condition"]["text"]} in ${location["name"]}, ${location["country"]}`)
+
+  // for days in forecast:
+  //     count += 1
+  //     if count > 6:
+  //         count -= 7
+  //     day = days["day"]
+  //     console.log(`{calendar.day_name[count]} will have a high of {day["maxtemp_f"]}, and a low of {day["mintemp_f"]}, and will be {day["condition"]["text"]}`)
+
+  // }
 
   return (
-    <div className="App">
-      <form>
-        <label htmlFor="city">City:</label><br/>
-        <input type="text" id="city" name="city" onChange={setWeather}></input><br/>
-        <label htmlFor="days">Days:</label><br/>
-        <input type="text" id="days" name="days" onChange={setWeather}></input><br/>
-        <input type="submit" value="Submit" onClick={getWeather}/>
-      </form>
-    </div>
+      <div className="App">
+        <Navbar />
+        <Forecast />
+      </div>
   );
 }
 
