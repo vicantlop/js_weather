@@ -12,13 +12,12 @@ export const fetchWeather = createAsyncThunk(
                 days: `${days}`
             },
             headers: {
-                'X-RapidAPI-Key': `${process.env.REACT_APP_APIKEY}`,
+                'X-RapidAPI-Key': `${process.env.REACT_APP_WEATHER_APIKEY}`,
                 'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
             }
         }
         try {
             const response = await axios.request(options);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -29,12 +28,7 @@ export const fetchWeather = createAsyncThunk(
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState: {weather:{}},
-    reducers: {
-        //actions
-        getWeather: (state, action) => {
-            state = action.payload
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchWeather.fulfilled, (state, action) => {
             state.weather = action.payload
@@ -43,6 +37,6 @@ export const weatherSlice = createSlice({
 })
 
 //action creators
-export const { getWeather } = weatherSlice.actions
+// export const { getWeather } = weatherSlice.actions
 
 export default weatherSlice.reducer

@@ -2,7 +2,6 @@ import 'materialize-css/dist/css/materialize.min.css';
 import './materialize';
 import Navbar from "./components/Navbar"
 import Forecast from './components/Forecast';
-import Signup from './components/Signup';
 
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
 
   return (
       <div className="App">
-        {/* <Signup /> */}
         <Navbar />
         <Forecast />
       </div>
