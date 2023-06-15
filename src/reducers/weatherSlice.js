@@ -3,13 +3,13 @@ import axios from 'axios';
 
 export const fetchWeather = createAsyncThunk(
     'fetchWeather',
-    async (city, days) => {
+    async (city) => {
         const options = {
             method: 'GET',
             url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
             params: {
                 q: `${city}`,
-                days: `${days}`
+                days: `3`
             },
             headers: {
                 'X-RapidAPI-Key': `${process.env.REACT_APP_WEATHER_APIKEY}`,

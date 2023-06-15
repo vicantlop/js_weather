@@ -1,21 +1,32 @@
 import { useSelector } from "react-redux";
+import CardNavbar from "./CardNavbar";
+import Today from "./Today";
+import Forecast from "./Forecast";
+import Hourly from "./Hourly";
 
 const WeatherCard = () => {
-    const weather = useSelector((state) => state.weather.weather)
-    
-    let location
-    let current
-  
-    if (weather.location) {
-      location = weather["location"]
-      current = weather["current"]
+    const { selection } = useSelector((state) => state.cardSelection)
+
+    let selected
+
+    switch(selection) {
+        case ("today"):
+            selected = (<Today />)
+            break;
+        case ("hourly"):
+            selected = (<Hourly />)
+            break;
+        case ("3-day"):
+            selected = (<Forecast />)
+            break;
+        default:
+            selected = (<Today />)
     }
-    
+
     return (
         <div className="card">
-            <img src={weather.current.condition.icon} alt="calexico"/>
-            <div>It is currently {current["temp_f"]} degrees fahrenheit and {current["condition"]["text"]} in {location["name"]}, {location["country"]}</div>
-            <div>tomorrow is {weather.forecast.forecastday[0].day.avgtemp_f}</div>
+            <CardNavbar />
+            {selected ? selected : null}
         </div>
     )
 }
