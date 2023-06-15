@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from '../reducers/weatherSlice';
-import WeatherCard from './WeatherCard';
+import WeatherCard from './cards/WeatherCard';
 
 const Search = () => {
     const [city, setCity] = useState("")

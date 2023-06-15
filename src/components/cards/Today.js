@@ -20,7 +20,7 @@ const Today = () => {
                 {current.condition.text} <img src={current.condition.icon} alt="condition icon"></img>
             </div>
             <div>
-                {current.feelslike_f}
+                {current.feelslike_f}°
             </div>
         </div>
     )

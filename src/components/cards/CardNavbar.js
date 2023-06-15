@@ -1,4 +1,4 @@
-import { setCardNavbar } from "../reducers/cardSlice";
+import { setCardNavbar } from "../../reducers/cardSlice";
 import { useDispatch } from "react-redux";
 
 const CardNavbar = () => {
@@ -12,7 +12,6 @@ const CardNavbar = () => {
     return (
         <nav className="grey">
             <div className="nav-wrapper">
-                {/* <a href="/#" className="brand-logo">Weather.js</a> */}
                 <ul id="nav" className="center">
                     <li><a href="today" name="today" onClick={cardTab}>Today</a></li>
                     <li><a href="hourly" name="hourly" onClick={cardTab}>Hourly</a></li>
