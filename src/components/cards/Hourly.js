@@ -10,7 +10,7 @@ const Hourly = () => {
         let hours = weather.forecast.forecastday[0].hour
 
         for(let i = 0; i < hours.length; i++) {
-            eachHour.push(<EachHour time={hours[i].time} temp={hours[i].temp_f} icon={hours[i].condition.icon} rainChance={hours[i].chance_of_rain} />)
+            eachHour.push(<EachHour time={hours[i].time} temp={hours[i].temp_f} icon={hours[i].condition.icon} rainChance={hours[i].chance_of_rain} key={i}/>)
         }
     }
 

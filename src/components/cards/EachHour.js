@@ -13,6 +13,7 @@ const EachHour = ({ time, temp, icon, rainChance }) => {
             <div>
                 {rainChance}%
             </div>
+            <br />
         </li>
     )
 }

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import CardNavbar from "./CardNavbar";
 import Today from "./Today";
-import Forecast from "./Forecast";
+import ThreeDay from "./ThreeDay";
 import Hourly from "./Hourly";
 
 const WeatherCard = () => {
@@ -17,7 +17,7 @@ const WeatherCard = () => {
             selected = (<Hourly />)
             break;
         case ("3-day"):
-            selected = (<Forecast />)
+            selected = (<ThreeDay />)
             break;
         default:
             selected = (<Today />)
