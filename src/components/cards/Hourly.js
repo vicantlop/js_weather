@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import EachHour from "./EachHour"
 
-const Hourly = () => {
-    const { weather } = useSelector((state) => state.weather)
+const Hourly = ({i}) => {
+    const weather = useSelector((state) => state.weather.cities[i])
 
     let eachHour = []
     

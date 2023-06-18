@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
-const Today = () => {
-    const { weather } = useSelector((state) => state.weather)
+const Today = ({i}) => {
+    const weather = useSelector((state) => state.weather.cities[i])
 
     let current
     let location

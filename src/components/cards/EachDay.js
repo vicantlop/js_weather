@@ -1,6 +1,4 @@
 const EachDay = ({day, high, low, humidity, sunrise, sunset, moonrise, moonset, rainChance, uv, icon, condition}) => {
-    console.log(day)
-    
     return(
         <div>
             <div>

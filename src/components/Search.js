@@ -7,7 +7,7 @@ import WeatherCard from './cards/WeatherCard';
 const Search = () => {
     const [city, setCity] = useState("")
 
-    const {weather} = useSelector((state) => state.weather)
+    const { cities } = useSelector((state) => state.weather)
     const dispatch = useDispatch()
 
     const setWeather = (event) => {
@@ -20,6 +20,14 @@ const Search = () => {
         dispatch(fetchWeather(city))
     }
 
+    let cards = []
+
+    if(cities.length) {
+        for(let i = 0; i < cities.length; i++) {
+            cards.push(<WeatherCard key={i} city={cities[i].location.name} index={i}/>)
+        }
+    }
+
     return (
         <div>
             <form>
@@ -27,7 +35,7 @@ const Search = () => {
                 <input type="text" id="city" name="city" onChange={setWeather}></input><br />
                 <input type="submit" value="Submit" onClick={getWeather} />
             </form>
-            {weather.location ? (<WeatherCard />) : null}
+            {cards}
         </div>
     )
 }

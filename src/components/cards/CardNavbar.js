@@ -1,12 +1,12 @@
-import { setCardNavbar } from "../../reducers/cardSlice";
+import { setCardNavbar } from "../../reducers/weatherSlice";
 import { useDispatch } from "react-redux";
 
-const CardNavbar = () => {
+const CardNavbar = ({i}) => {
     const dispatch = useDispatch()
 
     const cardTab = (event) => {
         event.preventDefault();
-        dispatch(setCardNavbar(event.target.name))
+        dispatch(setCardNavbar({index: i, selected: event.target.name}))
     }
 
     return (

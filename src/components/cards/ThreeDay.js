@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import EachDay from "./EachDay";
 
-const ThreeDay = () => {
-    const { weather } = useSelector((state) => state.weather)
+const ThreeDay = ({i}) => {
+    const weather = useSelector((state) => state.weather.cities[i])
 
     let forecast
 

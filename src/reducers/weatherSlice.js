@@ -27,16 +27,22 @@ export const fetchWeather = createAsyncThunk(
 
 export const weatherSlice = createSlice({
     name: 'weather',
-    initialState: {weather:{}},
-    reducers: {},
+    initialState: {
+        cities: [],
+    },
+    reducers: {
+        setCardNavbar: (state, action) => {
+            state.cities[action.payload.index].selected = action.payload.selected;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchWeather.fulfilled, (state, action) => {
-            state.weather = action.payload
+            state.cities.push(action.payload)
         })
     },
 })
 
 //action creators
-// export const { getWeather } = weatherSlice.actions
+export const { setCardNavbar } = weatherSlice.actions
 
 export default weatherSlice.reducer
