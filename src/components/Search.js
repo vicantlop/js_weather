@@ -1,8 +1,15 @@
 import { useState } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from '../reducers/weatherSlice';
 import WeatherCard from './cards/WeatherCard';
+
+import styled from 'styled-components';
+
+const CardsContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+`
 
 const Search = () => {
     const [city, setCity] = useState("")
@@ -15,16 +22,18 @@ const Search = () => {
         setCity(event.target.value);
     }
 
-    const getWeather = async(event) => {
+    const getWeather = async (event) => {
         event.preventDefault()
         dispatch(fetchWeather(city))
     }
 
     let cards = []
 
-    if(cities.length) {
-        for(let i = 0; i < cities.length; i++) {
-            cards.push(<WeatherCard key={i} city={cities[i].location.name} index={i}/>)
+
+
+    if (cities.length) {
+        for (let i = 0; i < cities.length; i++) {
+            cards.push(<WeatherCard key={i} city={cities[i].location.name} index={i} />)
         }
     }
 
@@ -35,7 +44,9 @@ const Search = () => {
                 <input type="text" id="city" name="city" onChange={setWeather}></input><br />
                 <input type="submit" value="Submit" onClick={getWeather} />
             </form>
-            {cards}
+            <CardsContainer>
+                {cards}
+            </CardsContainer>
         </div>
     )
 }
