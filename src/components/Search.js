@@ -44,15 +44,25 @@ const Search = () => {
     //     let coordinates = `${location.data.lat},${location.data.lon}`
     //     dispatch(fetchWeather(coordinates))
     // }, [])
+    useEffect(() => {
+        document.getElementById("citySubmit").disabled = true;
+    }, [])
 
     const setWeather = (event) => {
         event.preventDefault();
         setCity(event.target.value);
+        if(event.target.value) {
+            document.getElementById("citySubmit").disabled = false;
+        } else {
+            document.getElementById("citySubmit").disabled = true;
+        }
     }
 
-    const getWeather = async (event) => {
+    const getWeather = (event) => {
         event.preventDefault()
         dispatch(fetchWeather(city))
+        document.getElementById("city").value = "";
+        document.getElementById("citySubmit").disabled = true;
     }
 
     let cards = []
@@ -67,7 +77,7 @@ const Search = () => {
             <form>
                 <label htmlFor="city">City:</label><br />
                 <input type="text" id="city" name="city" onChange={setWeather}></input><br />
-                <input type="submit" value="Submit" onClick={getWeather} />
+                <input type="submit" id="citySubmit" value="Submit" onClick={getWeather}/>
             </form>
             <CardsContainer>
                 {cards}
