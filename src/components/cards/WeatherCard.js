@@ -4,6 +4,8 @@ import Today from "./Today";
 import ThreeDay from "./ThreeDay";
 import Hourly from "./Hourly";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { deleteCity } from "../../reducers/weatherSlice";
 
 const Card = styled.div`
     height: 300px;
@@ -13,6 +15,12 @@ const Card = styled.div`
 
 const WeatherCard = ({index}) => {
     const selection = useSelector((state) => state.weather.cities[index].selected)
+    const dispatch = useDispatch()
+
+    const removeWeatherCard = (event) => {
+        event.preventDefault()
+        dispatch(deleteCity(index))
+    }
 
     let selected
 
@@ -34,6 +42,7 @@ const WeatherCard = ({index}) => {
         <Card className="card">
             <CardNavbar i={index}/>
             {selected ? selected : null}
+            <button className="btn" type="button" onClick={removeWeatherCard}>Remove Weather Card</button>
         </Card>
     )
 }

@@ -33,6 +33,9 @@ export const weatherSlice = createSlice({
     reducers: {
         setCardNavbar: (state, action) => {
             state.cities[action.payload.index].selected = action.payload.selected;
+        },
+        deleteCity: (state, action) => {
+            state.cities.splice(action.payload,1)
         }
     },
     extraReducers: (builder) => {
@@ -43,6 +46,6 @@ export const weatherSlice = createSlice({
 })
 
 //action creators
-export const { setCardNavbar } = weatherSlice.actions
+export const { setCardNavbar, deleteCity } = weatherSlice.actions
 
 export default weatherSlice.reducer
