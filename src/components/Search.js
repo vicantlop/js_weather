@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from '../reducers/weatherSlice';
 import WeatherCard from './cards/WeatherCard';
-import { fetchAutocompleteList } from '../reducers/autocompleteSlice';
+import { clearList, fetchAutocompleteList } from '../reducers/autocompleteSlice';
+import AutocompleteList from './AutocompleteList';
 
 // import axios from 'axios';
 
@@ -60,6 +61,8 @@ const Search = () => {
         }
         if (event.target.value.length > 2) {
             dispatch(fetchAutocompleteList(event.target.value))
+        } else if ( event.target.value.length < 3 && autocompleteList.length > 0) {
+            dispatch(clearList())
         }
     }
 
@@ -78,23 +81,20 @@ const Search = () => {
     }
 
     console.log(autocompleteList)
-
+    let list = []
+    if (autocompleteList.length > 0) {
+        for (let i = 0; i < autocompleteList.length && i < 3; i++) {
+            list.push(<AutocompleteList key={i} city={autocompleteList[i].name} region={autocompleteList[i].region} country={autocompleteList[i].country}/>)
+        }
+    }
     return (
         <div>
             <form>
                 <label htmlFor="city">City:</label><br />
                 <input type="text" id="city" className="dropdown-trigger" data-target='dropdown1' name="city" onChange={setWeather}></input><br />
                 <input type="submit" id="citySubmit" value="Submit" onClick={getWeather} />
-                {/* <a className='dropdown-trigger btn' href='#/' data-target='dropdown1'>Drop Me!</a> */}
-
-                {/* <!-- Dropdown Structure --> */}
                 <ul id='dropdown1' className='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li className="divider" tabIndex="-1"></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i className="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i className="material-icons">cloud</i>five</a></li>
+                    {list}
                 </ul>
             </form>
             <CardsContainer>

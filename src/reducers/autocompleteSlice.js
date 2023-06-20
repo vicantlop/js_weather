@@ -27,7 +27,11 @@ export const autocompleteSlice = createSlice({
     initialState: {
         autocompleteList: [],
     },
-    reducers: {},
+    reducers: {
+        clearList(state) {
+            state.autocompleteList = [];
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchAutocompleteList.fulfilled, (state, action) => {
             state.autocompleteList = action.payload
@@ -36,6 +40,5 @@ export const autocompleteSlice = createSlice({
 })
 
 //action creators
-// export const { setCardNavbar, deleteCity } = autocompleteSlice.actions
-
+export const { clearList } = autocompleteSlice.actions;
 export default autocompleteSlice.reducer
