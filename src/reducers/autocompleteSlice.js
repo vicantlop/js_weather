@@ -26,10 +26,14 @@ export const autocompleteSlice = createSlice({
     name: 'autocompleteList',
     initialState: {
         autocompleteList: [],
+        cityCoordinates: ""
     },
     reducers: {
         clearList(state) {
             state.autocompleteList = [];
+        },
+        setCoordinates(state, action) {
+            state.cityCoordinates = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -40,5 +44,5 @@ export const autocompleteSlice = createSlice({
 })
 
 //action creators
-export const { clearList } = autocompleteSlice.actions;
-export default autocompleteSlice.reducer
+export const { clearList, setCoordinates } = autocompleteSlice.actions;
+export default autocompleteSlice.reducer;

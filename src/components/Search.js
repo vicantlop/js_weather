@@ -40,6 +40,7 @@ const Search = () => {
 
     const { cities } = useSelector((state) => state.weather)
     const { autocompleteList } = useSelector((state) => state.autocompleteList)
+    const { cityCoordinates } = useSelector((state) => state.autocompleteList)
     const dispatch = useDispatch()
 
     // useEffect(() => {
@@ -54,11 +55,6 @@ const Search = () => {
     const setWeather = (event) => {
         event.preventDefault();
         setCity(event.target.value);
-        if (event.target.value) {
-            document.getElementById("citySubmit").disabled = false;
-        } else {
-            document.getElementById("citySubmit").disabled = true;
-        }
         if (event.target.value.length > 2) {
             dispatch(fetchAutocompleteList(event.target.value))
         } else if ( event.target.value.length < 3 && autocompleteList.length > 0) {
@@ -68,9 +64,10 @@ const Search = () => {
 
     const getWeather = (event) => {
         event.preventDefault()
-        dispatch(fetchWeather(city))
+        dispatch(fetchWeather(cityCoordinates))
         document.getElementById("city").value = "";
         document.getElementById("citySubmit").disabled = true;
+        dispatch(clearList())
     }
 
     let cards = []
@@ -80,11 +77,11 @@ const Search = () => {
         }
     }
 
-    console.log(autocompleteList)
+    console.log(city)
     let list = []
     if (autocompleteList.length > 0) {
         for (let i = 0; i < autocompleteList.length && i < 3; i++) {
-            list.push(<AutocompleteList key={i} city={autocompleteList[i].name} region={autocompleteList[i].region} country={autocompleteList[i].country}/>)
+            list.push(<AutocompleteList key={i} city={autocompleteList[i].name} region={autocompleteList[i].region} country={autocompleteList[i].country} lat={autocompleteList[i].lat} lon={autocompleteList[i].lon}/>)
         }
     }
     return (
