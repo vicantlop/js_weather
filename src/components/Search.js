@@ -4,30 +4,8 @@ import { fetchWeather } from '../reducers/weatherSlice';
 import WeatherCard from './cards/WeatherCard';
 import { clearList, fetchAutocompleteList } from '../reducers/autocompleteSlice';
 import AutocompleteList from './AutocompleteList';
-
-// import axios from 'axios';
-
+import M from 'materialize-css'
 import styled from 'styled-components';
-
-// let location
-
-// try {
-//     const response = await axios.request({
-//         method: 'GET',
-//         url: 'http://api.ipify.org/?format=json'
-//     })
-//     location = await axios.request({
-//         method: 'GET',
-//         url: 'https://weatherapi-com.p.rapidapi.com/ip.json',
-//         params: {q: response.data.ip},
-//         headers: {
-//           'X-RapidAPI-Key': `${process.env.REACT_APP_WEATHER_APIKEY}`,
-//           'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-//         }
-//     });
-// } catch (error) {
-//     console.error(error);
-// }
 
 const CardsContainer = styled.div`
     display: flex;
@@ -43,11 +21,6 @@ const Search = () => {
     const { cityCoordinates } = useSelector((state) => state.autocompleteList)
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     console.log(location.data)
-    //     let coordinates = `${location.data.lat},${location.data.lon}`
-    //     dispatch(fetchWeather(coordinates))
-    // }, [])
     useEffect(() => {
         document.getElementById("citySubmit").disabled = true;
     }, [])
@@ -84,6 +57,7 @@ const Search = () => {
             list.push(<AutocompleteList key={i} city={autocompleteList[i].name} region={autocompleteList[i].region} country={autocompleteList[i].country} lat={autocompleteList[i].lat} lon={autocompleteList[i].lon}/>)
         }
     }
+
     return (
         <div>
             <form>
@@ -91,6 +65,7 @@ const Search = () => {
                 <input type="text" id="city" className="dropdown-trigger" data-target='dropdown1' name="city" onChange={setWeather}></input><br />
                 <input type="submit" id="citySubmit" value="Submit" onClick={getWeather} />
                 <ul id='dropdown1' className='dropdown-content'>
+                    <li>hello</li>
                     {list}
                 </ul>
             </form>
@@ -102,3 +77,41 @@ const Search = () => {
 }
 
 export default Search;
+
+// import axios from 'axios';
+
+// let location
+
+// try {
+//     const response = await axios.request({
+//         method: 'GET',
+//         url: 'http://api.ipify.org/?format=json'
+//     })
+//     location = await axios.request({
+//         method: 'GET',
+//         url: 'https://weatherapi-com.p.rapidapi.com/ip.json',
+//         params: {q: response.data.ip},
+//         headers: {
+//           'X-RapidAPI-Key': `${process.env.REACT_APP_WEATHER_APIKEY}`,
+//           'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+//         }
+//     });
+// } catch (error) {
+//     console.error(error);
+// }
+
+    // useEffect(() => {
+    //     console.log(location.data)
+    //     let coordinates = `${location.data.lat},${location.data.lon}`
+    //     dispatch(fetchWeather(coordinates))
+    // }, [])
+
+        // document.addEventListener('DOMContentLoaded', function() {
+    //     var elems = document.querySelectorAll('.dropdown-trigger');
+    //     var instances = M.Dropdown.init(elems, options);
+    //   });
+    // const drop = () => {
+    //     var instance = M.Dropdown.getInstance(document.getElementById("dropdown1"))
+    //     console.log(document.getElementById("dropdown1"))
+    //     console.log(instance)
+    // }
